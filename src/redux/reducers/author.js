@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   author: null,
+  books: [],
   loading: true,
 };
 
@@ -25,7 +26,10 @@ const reducer = (state = initialState, action) => {
       };
 
     case ADD_BOOK:
-    //UPDATE THE STATE ACCORDINGLY
+      return {
+        ...state,
+        books: [action.payload].concat(state.books)
+      }
 
     default:
       return state;

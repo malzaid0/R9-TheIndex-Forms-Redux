@@ -7,6 +7,7 @@ import Loading from "./Loading";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchAuthorDetail } from "./redux/actions";
+import AddBookModal from "./AddBookModal";
 
 const AuthorDetail = (props) => {
   const authorID = useParams().authorID;
@@ -29,7 +30,8 @@ const AuthorDetail = (props) => {
             alt={authorName}
           />
         </div>
-        <BookTable books={author.books} />
+        <BookTable books={props.books.concat(author.books)} />
+        <AddBookModal author={author}/>
       </div>
     );
   }
@@ -38,6 +40,7 @@ const AuthorDetail = (props) => {
 const mapStateToProps = (state) => {
   return {
     author: state.authorState.author,
+    books: state.authorState.books,
     loading: state.authorState.loading,
   };
 };
